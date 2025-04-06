@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap');
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f5f2;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .header {
+        padding: 20px 0;
+        border-bottom: 1px solid #e9e2dd;
+      }
+
+      .names {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        font-weight: 700;
+        margin: 30px 0 10px;
+        color: #7d5e4a;
+      }
+
+      .ampersand {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 40px;
+        color: #c19875;
+      }
+
+      .date {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        margin: 20px 0;
+        color: #7d5e4a;
+      }
+
+      .details {
+        margin: 30px 0;
+        padding: 0 20px;
+      }
+
+      .rsvp-section {
+        position: relative;
+        margin: 40px 0 20px;
+        padding: 30px;
+        background-color: #f3ece7;
+        border-radius: 8px;
+      }
+
+      .rsvp-heading {
+        font-family: 'Playfair Display', serif;
+        color: #7d5e4a;
+        margin-bottom: 20px;
+      }
+
+      .form-control {
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e0d5cb;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #7d5e4a;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #6a4c3a;
+      }
+
+      .thank-you {
+        display: none;
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #e8f4ea;
+        border-radius: 8px;
+        color: #2e6339;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: 30px 0;
+      }
+
+      .divider-line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: #e9e2dd;
+      }
+
+      .divider-icon {
+        margin: 0 15px;
+        font-size: 20px;
+        color: #c19875;
+      }
+
+      .footer {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #888;
+      }
+
+      .food-preferences {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+      }
+
+      .food-preference {
+        flex: 1;
+        margin: 0 5px;
+      }
+
+      .food-preference label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .preference-count {
+        width: 100%;
+      }
+
+      .preference-section {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+        border: 1px solid #e0d5cb;
+      }
+
+      .preference-title {
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #7d5e4a;
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 15px;
+        }
+
+        .names {
+          font-size: 30px;
+        }
+
+        .date {
+          font-size: 20px;
+        }
+
+        .rsvp-section {
+          padding: 20px 15px;
+        }
+
+        .food-preferences {
+          flex-direction: column;
+        }
+
+        .food-preference {
+          margin: 5px 0;
+        }
+      }
+
+      .rsvp-overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+      }
+
+      .hourglass {
+        position: relative;
+        font-size: 40px;
+      }
+
+      .hourglass::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background-color: #7d5e4a;
+        border-radius: 50%;
+        animation: sandDrop 1s infinite ease-in-out;
+      }
+
+      @keyframes sandDrop {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0);
+        }
+        30% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="divider"></div>
+        <p>Together with their families</p>
+      </div>
+
+      <div class="names">Anamika &amp; Jones</div>
+      <p>request the pleasure of your company at their wedding reception</p>
+
+      <div class="date">Saturday, July 26, 2025</div>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">♥</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="details">
+        <p>Reception begins at 6:30 PM</p>
+        <p>
+          Pet Rose Event Center<br />
+          Kolenchery, Kochi, Kerala
+        </p>
+      </div>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">✦</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="rsvp-section">
+        <h2 class="rsvp-heading">RSVP</h2>
+        <p>Please respond by July 1, 2025</p>
+
+        <div id="rsvp-form">
+          <input id="guest-name" type="text" placeholder="Your Name" required />
+          <br />
+          <select id="attending" required>
+            <option value="">-- Will you attend? --</option>
+            <option value="yes">Joyfully Accept</option>
+            <option value="no">Regretfully Decline</option>
+          </select>
+          <br />
+
+          <div id="attendance-details" style="display: none;">
+            <div class="preference-section">
+              <div class="preference-title">Food Preferences</div>
+              <div class="food-preferences">
+                <div class="food-preference">
+                  <label for="veg-count">Vegetarian Guests</label>
+                  <input type="number" id="veg-count" value="0" min="0" class="preference-count" />
+                </div>
+                <div class="food-preference">
+                  <label for="nonveg-count">Non-Vegetarian Guests</label>
+                  <input type="number" id="nonveg-count" value="0" min="0" class="preference-count" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <textarea id="message" placeholder="Message for the couple (optional)"></textarea>
+          <br />
+          <button class="button" onclick="submitRSVP()">Submit RSVP</button>
+        </div>
+
+        <div class="thank-you" id="thank-you">
+          <h3>Thank you for your response!</h3>
+          <p>We look forward to celebrating with you.</p>
+        </div>
+
+        <div class="rsvp-overlay" id="rsvpOverlay">
+          <div class="hourglass">⌛</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>Contact: 7736744775, Jones</p>
+      </div>
+    </div>
+
+    <input type="hidden" name="formVersion" value="FormJJP" />
+
+    <script>
+      document.getElementById('attending').addEventListener('change', function () {
+        const attendanceDetails = document.getElementById('attendance-details');
+        if (this.value === 'yes') {
+          attendanceDetails.style.display = 'block';
+        } else {
+          attendanceDetails.style.display = 'none';
+          document.getElementById('veg-count').value = '0';
+          document.getElementById('nonveg-count').value = '0';
+        }
+      });
+
+      function submitRSVP() {
+        const name = document.getElementById('guest-name').value;
+        const attending = document.getElementById('attending').value;
+        const vegCount = document.getElementById('veg-count').value || '0';
+        const nonvegCount = document.getElementById('nonveg-count').value || '0';
+        const message = document.getElementById('message').value || '';
+        const formVersion = document.querySelector('input[name="formVersion"]').value;
+        const totalGuests = parseInt(vegCount) + parseInt(nonvegCount);
+
+        if (!name && !attending) {
+          alert('Please fill in your name and select your attendance status.');
+          return;
+        } else if (!name) {
+          alert('Please fill in your name.');
+          return;
+        } else if (!attending) {
+          alert('Please select your attendance status.');
+          return;
+        }
+
+        if (attending === 'yes' && totalGuests <= 0) {
+          alert('Please specify the number of vegetarian and/or non-vegetarian guests attending.');
+          return;
+        }
+
+        const queryParams = new URLSearchParams();
+        queryParams.append('name', name);
+        queryParams.append('attending', attending);
+        queryParams.append('vegCount', vegCount);
+        queryParams.append('nonvegCount', nonvegCount);
+        queryParams.append('totalGuests', totalGuests);
+        queryParams.append('message', message);
+        queryParams.append('formVersion', formVersion);
+
+        const finalUrl = `https://script.google.com/macros/s/AKfycbwhiQu1XrTSZ409MVTySgKFeNnbsrLFxcJ8d_oOZ0713uB1Q5LqYbPtquLrrAyOhzXDVw/exec?${queryParams.toString()}`;
+
+        document.getElementById('rsvpOverlay').style.display = 'flex';
+
+        fetch(finalUrl, { method: 'GET', mode: 'no-cors' })
+          .then(() => {
+            document.getElementById('rsvp-form').style.display = 'none';
+            document.getElementById('thank-you').style.display = 'block';
+            document.getElementById('rsvpOverlay').style.display = 'none';
+          })
+          .catch((error) => {
+            console.error('❌ Fetch error:', error);
+            alert('There was an error submitting your RSVP. Please try again.');
+            document.getElementById('rsvpOverlay').style.display = 'none';
+          });
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const attending = document.getElementById('attending');
+        const attendanceDetails = document.getElementById('attendance-details');
+        if (attending.value === 'yes') {
+          attendanceDetails.style.display = 'block';
+        } else {
+          attendanceDetails.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>
+
